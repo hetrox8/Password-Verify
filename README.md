@@ -30,6 +30,7 @@ How to Use
     The script will evaluate the password and provide feedback on its strength and suggestions for improvement.
 
 Example Usage
+![alt text](image.png)
 
 Enter your password: Suleiman
 Password Strength: Weak
