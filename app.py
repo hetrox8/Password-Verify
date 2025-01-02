@@ -1,5 +1,4 @@
-import tkinter as tk
-from tkinter import messagebox, filedialog
+import streamlit as st
 import re
 import math
 import pyperclip
@@ -83,52 +82,6 @@ def calculate_entropy(password):
     return entropy
 
 
-# Evaluate password and display results
-def evaluate_password():
-    password = password_entry.get()
-    if not password.strip():
-        messagebox.showwarning("Input Error", "Please enter a password.")
-        return
-
-    strength, suggestions = check_password_strength(password)
-    entropy = calculate_entropy(password)
-    result_label.config(text=f"Password Strength: {strength} (Entropy: {entropy:.2f} bits)")
-
-    # Add to history
-    password_history.append((password, strength, entropy))
-    update_history()
-
-    # Color coding
-    if strength == "Weak":
-        result_label.config(fg="#FF4444")  # Red
-    elif strength == "Medium":
-        result_label.config(fg="#FFAA00")  # Orange
-    else:
-        result_label.config(fg="#00C851")  # Green
-
-    suggestions_text.delete("1.0", tk.END)
-    if suggestions:
-        suggestions_text.insert(tk.END, "\n".join(suggestions))
-    else:
-        suggestions_text.insert(tk.END, "Your password looks strong!")
-
-
-# Toggle password visibility
-def toggle_password_visibility():
-    if show_password_var.get():
-        password_entry.config(show="")
-    else:
-        password_entry.config(show="*")
-
-
-# Copy suggestions to clipboard
-def copy_suggestions():
-    suggestions = suggestions_text.get("1.0", tk.END).strip()
-    if suggestions:
-        pyperclip.copy(suggestions)
-        messagebox.showinfo("Copied", "Suggestions copied to clipboard!")
-
-
 # Generate a random password
 def generate_password():
     # Define character pools
@@ -142,119 +95,44 @@ def generate_password():
 
     # Generate a random password
     password = ''.join(random.choice(all_chars) for _ in range(16))
-    password_entry.delete(0, tk.END)
-    password_entry.insert(0, password)
+    return password
 
 
-# Toggle dark mode
-def toggle_dark_mode():
-    if dark_mode_var.get():
-        root.config(bg="#2E2E2E")
-        for widget in root.winfo_children():
-            if widget.winfo_class() in ("Label", "Button", "Checkbutton", "Text"):
-                widget.config(bg="#2E2E2E", fg="white")
-            elif widget.winfo_class() == "Entry":
-                widget.config(bg="#555555", fg="white", insertbackground="white")
-            elif widget.winfo_class() == "Frame":
-                widget.config(bg="#2E2E2E")
-    else:
-        root.config(bg="#F5F5F5")
-        for widget in root.winfo_children():
-            if widget.winfo_class() in ("Label", "Button", "Checkbutton", "Text"):
-                widget.config(bg="#F5F5F5", fg="black")
-            elif widget.winfo_class() == "Entry":
-                widget.config(bg="white", fg="black", insertbackground="black")
-            elif widget.winfo_class() == "Frame":
-                widget.config(bg="#F5F5F5")
+# Streamlit App
+def main():
+    st.set_page_config(page_title="Password Strength Checker", page_icon="🔒")
+    st.title("Password Strength Checker")
+    st.write("Check the strength of your password and get suggestions to improve it.")
+
+    # Input field
+    password = st.text_input("Enter your password:", type="password")
+
+    # Generate password button
+    if st.button("Generate Strong Password"):
+        password = generate_password()
+        st.text_input("Generated Password:", value=password, type="password")
+
+    # Check password strength
+    if password:
+        strength, suggestions = check_password_strength(password)
+        entropy = calculate_entropy(password)
+
+        # Display results
+        st.subheader("Results")
+        st.write(f"**Password Strength:** {strength}")
+        st.write(f"**Entropy:** {entropy:.2f} bits")
+
+        if suggestions:
+            st.subheader("Suggestions")
+            for suggestion in suggestions:
+                st.write(f"- {suggestion}")
+        else:
+            st.success("Your password looks strong!")
+
+    # Footer
+    st.markdown("---")
+    st.write("Made by Suleiman Yusuf Gacheru")
 
 
-# Update password history
-def update_history():
-    history_text.delete("1.0", tk.END)
-    for idx, (password, strength, entropy) in enumerate(password_history, 1):
-        history_text.insert(tk.END, f"{idx}. Password: {password}, Strength: {strength}, Entropy: {entropy:.2f} bits\n")
-
-
-# Export results to a text file
-def export_results():
-    file_path = filedialog.asksaveasfilename(defaultextension=".txt", filetypes=[("Text Files", "*.txt")])
-    if file_path:
-        with open(file_path, "w") as file:
-            file.write(result_label.cget("text") + "\n")
-            file.write("Suggestions:\n")
-            file.write(suggestions_text.get("1.0", tk.END))
-            file.write("\nPassword History:\n")
-            file.write(history_text.get("1.0", tk.END))
-        messagebox.showinfo("Export Successful", f"Results exported to {file_path}")
-
-
-# Create GUI window
-root = tk.Tk()
-root.title("Password Strength Checker")
-root.geometry("500x600")
-root.config(bg="#F5F5F5")
-
-# Modern font
-font_style = ("Helvetica", 12)
-
-# Input field
-input_frame = tk.Frame(root, bg="#F5F5F5")
-input_frame.pack(pady=10)
-
-tk.Label(input_frame, text="Enter your password:", font=font_style, bg="#F5F5F5").pack(pady=5)
-password_entry = tk.Entry(input_frame, show="*", width=30, font=font_style)
-password_entry.pack(pady=5)
-
-# Show password checkbox
-show_password_var = tk.BooleanVar()
-show_password_checkbox = tk.Checkbutton(input_frame, text="Show Password", variable=show_password_var, command=toggle_password_visibility, font=font_style, bg="#F5F5F5")
-show_password_checkbox.pack(pady=5)
-
-# Buttons frame
-button_frame = tk.Frame(root, bg="#F5F5F5")
-button_frame.pack(pady=10)
-
-check_button = tk.Button(button_frame, text="Check Password", command=evaluate_password, font=font_style, bg="#4CAF50", fg="white", padx=10, pady=5)
-check_button.grid(row=0, column=0, padx=5)
-
-generate_button = tk.Button(button_frame, text="Generate Password", command=generate_password, font=font_style, bg="#FF9800", fg="white", padx=10, pady=5)
-generate_button.grid(row=0, column=1, padx=5)
-
-# Result label
-result_label = tk.Label(root, text="", font=("Helvetica", 14, "bold"), bg="#F5F5F5")
-result_label.pack(pady=10)
-
-# Suggestions box
-suggestions_frame = tk.Frame(root, bg="#F5F5F5")
-suggestions_frame.pack(pady=10)
-
-tk.Label(suggestions_frame, text="Suggestions:", font=font_style, bg="#F5F5F5").pack(pady=5)
-suggestions_text = tk.Text(suggestions_frame, height=5, width=45, wrap=tk.WORD, font=font_style)
-suggestions_text.pack(pady=5)
-
-# Password history box
-history_frame = tk.Frame(root, bg="#F5F5F5")
-history_frame.pack(pady=10)
-
-tk.Label(history_frame, text="Password History:", font=font_style, bg="#F5F5F5").pack(pady=5)
-history_text = tk.Text(history_frame, height=5, width=45, wrap=tk.WORD, font=font_style)
-history_text.pack(pady=5)
-
-# Copy suggestions button
-copy_button = tk.Button(root, text="Copy Suggestions", command=copy_suggestions, font=font_style, bg="#2196F3", fg="white", padx=10, pady=5)
-copy_button.pack(pady=10)
-
-# Export results button
-export_button = tk.Button(root, text="Export Results", command=export_results, font=font_style, bg="#9C27B0", fg="white", padx=10, pady=5)
-export_button.pack(pady=10)
-
-# Dark mode checkbox
-dark_mode_var = tk.BooleanVar()
-dark_mode_checkbox = tk.Checkbutton(root, text="Dark Mode", variable=dark_mode_var, command=toggle_dark_mode, font=font_style, bg="#F5F5F5")
-dark_mode_checkbox.pack(pady=10)
-
-# Password history list
-password_history = []
-
-# Run the application
-root.mainloop()
+if __name__ == "__main__":
+    main()
