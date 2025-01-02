@@ -32,7 +32,7 @@ How to Use
 Example Usage
 ![alt text](image.png)
 ![image](https://github.com/user-attachments/assets/f093b505-8ee7-4273-9e51-acf956b3a09c)
-![Uploading image.png…]()
+![image](https://github.com/user-attachments/assets/86050d9b-4572-428f-8e77-ea03c7c1d572)
 
 
 Enter your password: Suleiman
