@@ -31,6 +31,9 @@ How to Use
 
 Example Usage
 ![alt text](image.png)
+![image](https://github.com/user-attachments/assets/f093b505-8ee7-4273-9e51-acf956b3a09c)
+![Uploading image.png…]()
+
 
 Enter your password: Suleiman
 Password Strength: Weak
