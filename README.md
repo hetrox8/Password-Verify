@@ -1,5 +1,3 @@
----
-
 # Password Strength Checker
 
 ## **Overview**
