@@ -51,8 +51,8 @@ The password strength is categorized as **"Weak"**, **"Medium"**, or **"Strong"*
 
 ![Password Strength Checker Example](image.png)
 ![image](https://github.com/user-attachments/assets/0aeb41cd-1960-4534-a252-09bdb827a205)
-![Uploading image.png…]()
-![Uploading image.png…]()
+![image](https://github.com/user-attachments/assets/366f7617-f45a-4b71-a5a9-7a8fe13cae7a)
+
 
 ```plaintext
 Enter your password: Suleiman
