@@ -103,8 +103,8 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 ## **Contact**
 
 For questions or support, contact:
-- **Name**: Nyali Ayec Pc 06
-- **Email**: [your-email@example.com](mailto:dretrevor8@gmail.com)
+- **Name**: Suleiman Yusuf Gacheru
+- **Email**: [dretrevor8@gmail.com](mailto:dretrevor8@gmail.com)
 
 ---
 
