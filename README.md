@@ -1,5 +1,3 @@
-Here’s the updated `README.md` file incorporating your provided content and adding a link to the video in the `assets` folder. I’ve also improved the structure and formatting for better readability.
-
 ---
 
 # Password Strength Checker
@@ -33,7 +31,7 @@ The password strength is categorized as **"Weak"**, **"Medium"**, or **"Strong"*
 
 1. **Clone or download the repository**:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/hetrox8/Password-Verify.git
    cd Password-Verify
    ```
 
