@@ -109,12 +109,3 @@ For questions or support, contact:
 ---
 
 Enjoy using the Password Strength Checker! 🚀
-
----
-
-### **Notes**
-- Replace `<repository-url>` with the actual URL of your repository.
-- Ensure the `assets/video.mp4` file exists and is correctly linked in the `Video Demonstration` section.
-- If you don’t have a `LICENSE` file, you can create one or remove the **License** section.
-
-Let me know if you need further adjustments!
