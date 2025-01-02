@@ -68,7 +68,7 @@ Suggestions:
 
 For a step-by-step guide, watch the video demonstration:
 
-[![Password Strength Checker Video](assets/video.mp4)](assets/video.mp4)
+[![Password Strength Checker Video](assets/video.webm)](assets/video.webm)
 
 ---
 
