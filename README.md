@@ -40,7 +40,7 @@ The password strength is categorized as **"Weak"**, **"Medium"**, or **"Strong"*
 
 3. **Run the script**:
    ```bash
-   python app.py
+   python -m streamlit app.py
    ```
 
 4. **Enter your password** when prompted. The script will evaluate the password and provide feedback on its strength and suggestions for improvement.
