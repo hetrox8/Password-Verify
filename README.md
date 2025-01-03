@@ -68,7 +68,9 @@ Based on these checks, the tool assigns a strength rating and provides suggestio
    ```bash
    python password_checker.py
    ```
-
+![Password Strength Checker Example](image.png)
+![image](https://github.com/user-attachments/assets/0aeb41cd-1960-4534-a252-09bdb827a205)
+![image](https://github.com/user-attachments/assets/366f7617-f45a-4b71-a5a9-7a8fe13cae7a)
 2. **Enter Your Password**:
    When prompted, enter the password you want to check.
 
